@@ -52,7 +52,6 @@ body {
 }
 .vbanner .vinner .item {
   height: 500px;
-  background-size: 100%;
 }
 @media screen and (min-width: 1369px) {
   .vbanner .vinner .item {
@@ -61,12 +60,15 @@ body {
 }
 .vbanner .vinner .item:nth-child(1) {
   background: url(../images/1.jpg) no-repeat;
+  background-size: 100%;
 }
 .vbanner .vinner .item:nth-child(2) {
   background: url(../images/2.jpg) no-repeat;
+  background-size: 100%;
 }
 .vbanner .vinner .item:nth-child(3) {
   background: url(../images/4.jpg) no-repeat;
+  background-size: 100%;
 }
 .vbanner .vinner .item .carousel-caption {
   width: 100%;
@@ -268,6 +270,7 @@ body {
 }
 .middle-section .jumbotron {
   background: url(../images/bg2.jpg) no-repeat top;
+  background-size: 100%;
 }
 .middle-section .jumbotron .container {
   padding-top: 50px;
@@ -365,6 +368,7 @@ body {
 .vnewsletter {
   padding: 50px 0;
   background: url(../images/bg3.jpg) no-repeat center;
+  background-size: 100%;
 }
 .vnewsletter .nltit {
   text-align: center;
