@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>美丽说-潮流穿搭快人一步</title>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="./css/ss.css">
+	<script src="./js/ss.js"></script>
+	<link rel="stylesheet" href="./css/css.css">
+</head>
+
+<body>
+	<!-- 顶部导航栏 -->
+	<div class="top">
+		<div class="w">
+			<div class="top-nav">
+				<ul class="fr">
+					<li><a href="#"><span class="wx"></span>微信登录</a></li>
+					<li><a href="#"><span class="qq"></span>QQ登录</a></li>
+					<li><a href="#">登录</a></li>
+					<li><a href="#">注册</a></li>
+					<li class="drop1">
+						<a href="#"><span class="shoucang"></span>我的收藏</a>
+						<ol class="down">
+							<li><a href="#">收藏宝贝</a></li>
+							<li><a href="#">收藏店铺</a></li>
+						</ol>
+					</li>
+					<li><a href="#"><span class="shopcar"></span>我的购物车</a></li>
+					<li><a href="#"><span class="order"></span>我的订单</a></li>
+					<li class="drop2">
+						<a href="#">帮助中心<span class="heplcenter"></span></a>
+						<ol class="down">
+							<li><a href="#">买家服务</a></li>
+							<li><a href="#">商家服务</a></li>
+							<li><a href="#">规则中心</a></li>
+						</ol>
+					</li>
+					<li><a href="#">商家后台</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 侧边栏 -->
+	<div class="sidebar">
+		<ul>
+			<li class="sj-dw">
+				<a href="#">
+					<span class="iconfont">&#xe692;</span>下载<div class="app-totate">APP</div>
+					<div class="dw-qrcode">
+						<img src="images/meili-app-qrcode140X140.png" alt="">
+					</div>
+					<div class="qr-sj1"></div>
+					<div class="qr-sj2"></div>
+				</a>
+			</li>
+			<li><a href="#"><span class="iconfont">&#xe621;</span>购物车</a></li>
+			<li><a href="#"><span class="iconfont">&#xe72c;</span>消息</a></li>
+			<li><a href="#"><span class="iconfont">&#xe693;</span>优惠券</a></li>
+			<li><a href="#"><span class="iconfont">&#xe60f;</span>收藏</a></li>
+			<li><a href="#"><span class="iconfont">&#xe638;</span>足迹</a></li>
+		</ul>
+	</div>
+	<!-- logo导航栏 -->
+	<div class="logo-nav">
+		<div class="w">
+			<div class="logo clearfix">
+				<div class="fl">
+					<a href="#">
+						<img src="images/logo.png" alt="">
+					</a>
+				</div>
+				<div class="search fl">
+					<div class="tab clearfix">
+						<span class="fl">宝贝</span>
+						<span class="fl">店铺</span>
+					</div>
+					<form action="index.html" method="post">
+						<input type="text"><span class="fangdajing"></span>
+					</form>
+					<div class="hotword">
+						<ul class="clearfix">
+							<li><a href="#" class="active">连衣裙</a></li>
+							<li><a href="#">运动鞋</a></li>
+							<li><a href="#" class="active">雪纺衫</a></li>
+							<li><a href="#" class="active">衬衫</a></li>
+							<li><a href="#">薄外套</a></li>
+							<li><a href="#">T恤</a></li>
+							<li><a href="#">套装</a></li>
+							<li><a href="#">牛仔裤</a></li>
+							<li><a href="#" class="active">小白鞋</a></li>
+							<li><a href="#">风衣</a></li>
+							<li><a href="#" class="active">绑带凉鞋</a></li>
+							<li><a href="#">粗跟单鞋</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="nav">
+				<ul class="clearfix w">
+					<li><a href="#">首页</a></li>
+					<li><a href="#">上衣</a></li>
+					<li><a href="#">裙子</a></li>
+					<li><a href="#">裤子</a></li>
+					<li><a href="#">女鞋</a></li>
+					<li><a href="#">包包</a></li>
+					<li><a href="#">配饰</a></li>
+					<li><a href="#">美妆</a></li>
+					<li><a href="#">男友</a></li>
+					<li><a href="#">童装</a></li>
+					<li><a href="#">家居</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 轮播图 -->
+	<div class="swiper-container banner w">
+		<div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="./images/banner01.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./images/banner02.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./images/banner03.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./images/banner04.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./images/banner05.jpg" alt=""></div>
+        </div>
+		<!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev banner-left"><img src="images/prev.png" alt=""></div>
+        <div class="swiper-button-next banner-right"><img src="images/next.png" alt=""></div>
+	</div>
+	<!-- 轮播图下面的小图 -->
+	<div class="banner-xbox w">
+		<ul>
+			<li><a href="#">
+					<img src="images/kinds01.png" alt="">
+				</a></li>
+			<li><a href="#">
+					<img src="images/kinds02.png" alt="">
+				</a></li>
+			<li><a href="#">
+					<img src="images/kinds03.png" alt="">
+				</a></li>
+			<li><a href="#">
+					<img src="images/kinds04.png" alt="">
+				</a></li>
+		</ul>
+	</div>
+	<!-- 今日新品 -->
+	<div class="content w">
+		<div class="content-title">
+			<a href="#" class="fr">查看更多&gt;</a>
+			<ul class="clearfix">
+				<li><a class="newBtn choice" href="javascript:void(0)">今<span>日新</span>品</a></li>
+				<li><a class="hotBtn" href="javascript:void(0)">一<span>周热</span>销</a></li>
+			</ul>
+		</div>
+		<ul class="commodity-display clearfix">
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods01.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods02.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods03.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods04.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods05.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods06.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods07.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods08.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods09.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="content-sp">
+					<div class="shangping">
+						<a href="#"><img src="images/goods10.png" alt=""></a>
+					</div>
+					<div class="clearfix">
+						<div class="jiage fl">93.75</div>
+						<div class="shoucang fr">250</div>
+					</div>
+					<div class="xiangxi">
+						<img src="images/youxuan.png" alt="">
+						小清新新款韩版气质收腰显瘦百搭蕾丝边V领木耳边镂空休闲连衣裙
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!-- 好物组货 -->
+	<div class="hwzh w">
+		<div class="hwzh-title clearfix">
+			<h1 class="fl">好物组货</h1>
+			<a href="#" class="fr">查看更多></a>
+		</div>
+		<div class="hwzh-content clearfix">
+			<div>
+				<a href="#" class="hwzh-content-top">
+					50款商品 <span></span>
+				</a>
+				<ul>
+					<li>
+						<a href="#" class="hwzh-content-con">
+							<img src="images/dress01.png" alt="">
+							¥　100.00
+						</a>
+					</li>
+					<li>
+						<a href="#" class="hwzh-content-con">
+							<img src="images/dress02.png" alt="">
+							¥　100.00
+						</a>
+					</li>
+					<li>
+						<a href="#" class="hwzh-content-con">
+							<img src="images/dress03.png" alt="">
+							¥　100.00
+						</a>
+					</li>
+				</ul>
+
+			</div>
+			<div>
+				<a href="#" class="hwzh-content-top">
+					50款商品 <span></span>
+				</a>
+				<ul>
+					<li>
+						<a href="#" class="hwzh-content-con">
+							<img src="images/pants01.png" alt="">
+							¥　100.00
+						</a>
+					</li>
+					<li>
+						<a href="#" class="hwzh-content-con">
+							<img src="images/pants02.png" alt="">
+							¥　100.00
+						</a>
+					</li>
+					<li>
+						<a href="#" class="hwzh-content-con">
+							<img src="images/pants03.png" alt="">
+							¥　100.00
+						</a>
+					</li>
+				</ul>
+
+			</div>
+			<div>
+				<a href="#" class="hwzh-content-top">
+					50款商品 <span></span>
+				</a>
+				<ul>
+					<li>
+						<a href="#" class="hwzh-content-con">
+							<img src="images/shoes01.png" alt="">
+							¥　100.00
+						</a>
+					</li>
+					<li>
+						<a href="#" class="hwzh-content-con">
+							<img src="images/shoes02.png" alt="">
+							¥　100.00
+						</a>
+					</li>
+					<li>
+						<a href="#" class="hwzh-content-con">
+							<img src="images/shoes03.png" alt="">
+							¥　100.00
+						</a>
+					</li>
+				</ul>
+
+			</div>
+
+		</div>
+	</div>
+	<!-- 底部 -->
+	<div class="foot">
+		<div class="foot-top w">
+			<div class="ft-r fr">
+				<div class="ft-r-wxfuwu fl">
+					<h3>美丽说微信服务号</h3>
+					<img src="images/weixin-server-qrcode.jpg" alt="">
+				</div>
+				<div class="ft-r-appdw fl">
+					<h3>美丽说微信服务号</h3>
+					<img src="images/meili-app-qrcode.png" alt="">
+				</div>
+			</div>
+			<div class="ft-l">
+				<div class="ft-l1 fl">
+					<h3>买家帮助</h3>
+					<ul>
+						<li><a href="#">新手指南</a></li>
+						<li><a href="#">服务保障</a></li>
+						<li><a href="#">常见问题</a></li>
+						<li><a href="#">风险监测</a></li>
+					</ul>
+				</div>
+				<div class="ft-l2 fl">
+					<h3>商家帮助</h3>
+					<ul>
+						<li><a href="#">供货商招募</a></li>
+						<li><a href="#">商家后台</a></li>
+					</ul>
+				</div>
+				<div class="ft-l3 fl">
+					<h3>关于我们</h3>
+					<ul>
+						<li><a href="#">关于美丽说</a></li>
+						<li><a href="#">联系我们</a></li>
+					</ul>
+				</div>
+				<div class="ft-l4 fl">
+					<h3>关注我们</h3>
+					<ul>
+						<li><a href="#"><span></span> 新浪微博</a></li>
+						<li><a href="#"><span></span> QQ空间</a></li>
+						<li><a href="#"><span></span> 腾讯微博</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="foot-botton">
+			<p>Copyright ©2017 xxxxxxxx.com 电信与信息服务业务经营许可证xxxxxx号 经营性网站备案信息</p>
+			<p>京ICP备xxxxxxxx号 京公网安备xxxxxxxx 客服电话：xxxx-xxx-xxx 文明办网文明上网举报电话：xxx-xxxxxxxx 违法不良信息举报中心</p>
+		</div>
+	</div>
+	<script src="./js/main.js"></script>
+</body>
+
+</html>
