@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抽奖画面</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        body{
+            background-color: #2c99fd;
+        }
+        .content{
+            margin: 30px auto;
+            width: 618px;
+            height: 660px;
+        }
+        .luck-draw{
+            width: 556px;
+            height: 594px;
+            box-sizing: border-box;
+            padding-top: 28px;
+            padding-left: 28px;
+            background-image: url(image/k1.png);
+            background-size: 100%; 
+            position: relative;
+        }
+
+        .lottery {
+            width: 502px;
+            height: 524px;
+            position: relative;
+        }
+
+        .lottery>li {
+            width: 154px;
+            height: 161px;
+            position: absolute;
+            
+            text-align: center;
+            
+        }
+        .libg{
+            background-image: url(image/bg2.png) ;
+            background-size: 100%; 
+        }
+        .lottery>li>img{
+            width: 100px;
+            height: 120px;
+        }
+        .lottery>li>h1{
+            font-size: 60px;
+            margin: 10px 0;
+            color: white;
+        }
+        .lottery li:nth-of-type(1) {
+            left: 10px;
+            top: 10px;
+        }
+
+        .lottery li:nth-of-type(2) {
+            left: 174px;
+            top: 10px;
+        }
+
+        .lottery li:nth-of-type(3) {
+            left: 338px;
+            top: 10px;
+        }
+
+        .lottery li:nth-of-type(4) {
+            /* 6 */
+            left: 338px;
+            top: 181px;
+        }
+
+        .lottery li:nth-of-type(5) {
+            /* 9 */
+            left: 338px;
+            top: 353px;
+        }
+
+        .lottery li:nth-of-type(6) {
+            /* 8 */
+            left: 174px;
+            top: 353px;
+            
+        }
+
+        .lottery li:nth-of-type(7) {
+            /* 7 */
+            left: 10px;
+            top: 353px;
+        }
+
+        .lottery li:nth-of-type(8) {
+            /* 4 */
+            left: 10px;
+            top: 181px;
+           
+        }
+
+        .lottery li:nth-of-type(9) {
+            /* 5 */
+            left: 174px;
+            top: 181px;
+            cursor: pointer;
+            background-image: url(image/bg1.png);
+        }
+        .active{
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: url(image/bg1.png);
+            background-size: 100%;
+        }
+        .raffle-finish{
+            width: 500px;
+            color:tomato;
+            position: absolute;
+            top: 160px;
+            left: 8px;
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 111;
+            display: none;
+        }
+        
+        .raffle-finish>div{
+            display: inline-block;
+            width: 380px;
+            height: 40px;
+            line-height: 40px;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #cd2427;
+        }
+        .bg-hui::before{
+            content: '';
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="bg-hui"></div> -->
+    <div class="content">
+        <div class="luck-draw ">
+            <ul class="lottery">
+                <li class="libg"><img src="image/j2.png" alt=""><p>谢谢参与</p></li>
+                <li class="libg"><img src="image/j1.png" alt=""><p>100红包</p></li>
+                <li class="libg"><img src="image/j2.png" alt=""><p>50红包</p></li>
+                <li class="libg"><img src="image/j2.png" alt=""><p>1000红包</p></li>
+                <li class="libg"><img src="image/j1.png" alt=""><p>10优惠卷</p></li>
+                <li class="libg"><img src="image/j2.png" alt=""><p>100优惠卷</p></li>
+                <li class="libg"><img src="image/j2.png" alt=""><p>神秘礼物</p></li>
+                <li class="libg"><img src="image/j1.png" alt=""><p>谢谢参与</p></li>
+                <li class="libg"><h1>抽奖</h1><p>消耗10积分</p></li>
+            </ul>
+            <div class="raffle-finish">
+                <h3>恭喜您</h3>
+                <img src="image/j1.png" alt="">
+                <p>获得谢谢参与</p>
+                <div class="finBtn">确定</div>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8];
+        var luckDraw=document.getElementsByClassName('luck-draw')[0];
+        var lottery = document.getElementsByClassName('lottery')[0];
+        var ali = lottery.getElementsByTagName('li');
+        var finishBox=document.getElementsByClassName('raffle-finish')[0];
+
+        var bgNum=1;
+        setInterval(function(){
+            bgNum=(bgNum==1) ? 2:1;
+            luckDraw.style.backgroundImage='url(image/k'+bgNum+'.png)';
+        }, 500);
+        
+        var i = 0; //转到哪个位置
+        var count = 0; //转圈初始值
+        var totalCount = 9; //转动的总圈数
+        var speed = 500; //转圈速度，越大越慢
+        var minSpeed = 500;
+        var timer;
+        var isClick = true;
+        var index = 0; //指定转到哪个奖品
+        // 抽奖
+        function roll() {
+            speed -= 50;
+            if (speed <= 10) {
+                speed = 10;
+            }
+            //每次调用都去掉全部active类名
+            for (var j = 0; j < ali.length; j++) {
+                ali[j].classList.remove('active');
+            }
+            i++;
+            //计算转圈次数
+            if (i >= ali.length - 1) {
+                i = 0;
+                count++;
+            }
+            ali[i].classList.add('active');
+            
+            //抽奖停止
+            if (count >= totalCount && (i + 1) == index) {
+                clearTimeout(timer);
+                isClick = true;
+                speed = minSpeed;
+                // 弹框
+                functionTips(i);
+            } else {
+                timer = setTimeout(roll, speed); 
+                if (count >= totalCount - 1 || speed <= 50) {
+                    speed += 100;
+                }
+            }
+        }
+        // 完成弹框
+        function functionTips(flagNum){
+            // 显示弹框
+            luckDraw.setAttribute('class','luck-draw bg-hui');
+            finishBox.style.display='block';
+
+            var zpImgdz=ali[flagNum].getElementsByTagName('img')[0].getAttribute('src');
+            var zpPcon=ali[flagNum].getElementsByTagName('p')[0].innerHTML;
+            console.log(zpImgdz);
+            console.log(zpPcon)
+
+            var fimg=finishBox.getElementsByTagName('img')[0];
+            fimg.setAttribute('src',zpImgdz+'');
+            var fp =finishBox.getElementsByTagName('p')[0];
+            fp.innerHTML='获得'+zpPcon;
+            var btn=finishBox.getElementsByTagName('div')[0];
+
+            btn.onclick=function(){
+                // 关闭弹框
+                luckDraw.setAttribute('class','luck-draw');
+                finishBox.style.display='none';
+            }
+        }
+        ali[ali.length - 1].onclick = function () {
+            if (isClick) {
+                count = 0;
+                //随机产生中奖位置
+                index = Math.floor(Math.random()*arr.length+1);
+                roll();
+                isClick = false;
+               
+            }
+        }
+        
+    </script>
+</body>
+</html>

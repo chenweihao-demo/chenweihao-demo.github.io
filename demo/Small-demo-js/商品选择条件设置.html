@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品选择条件设置</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        
+        li{
+            list-style-type: none;
+        }
+        .content{
+            width: 900px;
+            height: 250px;
+            margin: 10px auto;
+            /* padding: 10px; */
+            background-color: #fefefe;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+        }
+        .content ul{
+            display: inline-block;
+        }
+        .content li{
+            float: left;
+            margin-left: 10px;
+            cursor: pointer;
+
+        }
+        
+        .brand-box,.price-box,.size-box,.gpu-box,.choice-box{
+            height: 30px;
+            line-height: 30px;
+            padding: 10px 0px 10px 0px;
+            margin-left: 10px;
+        }
+        .brand-box,.price-box,.size-box{
+            border-bottom: 1px dashed #ececec;
+        }
+        .choice-box{
+            padding: 10px 0px 10px 10px;
+            margin-left: 0px;
+            background-color: #efefef;
+        }
+        .brand-box>i,.price-box>i,.size-box>i,.gpu-box>i,.choice-box>i{
+            vertical-align: top;
+            font-style: normal;
+            color: #acadae;
+        }
+        .brand-box>ul{
+            height: 30px;
+        }
+        .choice-box>div{
+            display: inline-block;
+            font-size: 16px;
+            line-height: 16px;
+            padding-left: 5px;
+            padding: 6px 0px 6px 6px;
+            border-radius: 3px;
+            border: 1px solid #d66e87;
+            margin-right: 5px;
+        }
+        .choice-box>div>span{
+            color: white;
+            background-color: #c4284d;
+            border-radius: 3px;
+            padding: 0px 6px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        .ative{
+            font-weight: bold;
+            color: #c4284e;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="brand-box" id="brand">
+            <i>品牌：</i>
+            <ul>
+                <li>惠普</li>
+                <li>联想</li>
+                <li>戴尔</li>
+                <li>三星</li>
+                <li>宏基</li>
+                <li>苹果</li>
+                <li>神州</li>
+                <li>华硕</li>
+                <li>方正</li>
+            </ul>
+        </div>
+        <div class="price-box" id="price">
+            <i>价格：</i>
+            <ul>
+                <li>3000-3999</li>
+                <li>4000-4999</li>
+                <li>5000-5999</li>
+                <li>6000-6999</li>
+                <li>7000-7999</li>
+                <li>8000-8999</li>
+                <li>9000-9999</li>
+                <li>10000以上</li>
+            </ul>
+        </div>
+        <div class="size-box" id="size">
+            <i>尺寸：</i>
+            <ul>
+                <li>8.9英寸以及以下</li>
+                <li>11英寸</li>
+                <li>12英寸</li>
+                <li>13英寸</li>
+                <li>14英寸</li>
+                <li>15英寸</li>
+                <li>16英寸</li>
+            </ul>
+        </div>
+        <div class="gpu-box" id="gpu">
+            <i>显卡：</i>
+            <ul>
+                <li>独立显卡</li>
+                <li>集显显卡</li>
+                <li>核芯显卡</li>
+            </ul>
+        </div>
+        <div class="choice-box" id="choice">
+            <i>已选条件：</i>
+            <!-- <div><b>惠普</b><span>X</span></div> -->
+        </div>
+    </div>
+    <script>
+        var brandLi=document.getElementById('brand').getElementsByTagName('li');
+        var priceLi =document.getElementById('price').getElementsByTagName('li');
+        var sizeLi =document.getElementById('size').getElementsByTagName('li');
+        var gpuLi =document.getElementById('gpu').getElementsByTagName('li');
+        var choice = document.getElementById('choice');
+        // console.log(choice.previousElementSibling)
+        addEvent(brandLi,1);
+        addEvent(priceLi,2);
+        addEvent(sizeLi,3);
+        addEvent(gpuLi,4);
+        // 循环绑定事件
+        function addEvent(arr,flag){
+            for(var i=0;i<arr.length;i++){
+                arr[i].onclick=function(){
+                    clearCheck(arr);
+                    this.setAttribute('class','ative')
+                    var liCont =this.innerHTML;
+                    if(changeCheck(arr,flag,liCont)){
+                        return;
+                    }
+                    addCheck(arr,liCont,flag);
+                }
+            }
+        }
+        // 清除选择
+        function clearCheck(arr){
+            for(var i=0;i<arr.length;i++){
+                if(arr[i].getAttribute('class')=='ative'){
+                    arr[i].removeAttribute('class');
+                }
+            }
+        }
+        // 修改选择的内容
+        function changeCheck(arr,flag,liCont){
+            var div = choice.getElementsByTagName('div');
+            for (var i =0;i<div.length;i++){
+                if(div[i].getAttribute('value')==flag){
+                    div[i].firstElementChild.innerText=liCont;
+                    return true;
+                }
+            }
+
+        }
+        // 添加选择
+        function addCheck(arr,liCont,flag){
+            var div = document.createElement('div');
+            div.setAttribute('value',flag+'');
+            choice.appendChild(div);
+            var b = document.createElement('b');
+            b.innerHTML=liCont;
+            div.appendChild(b);
+            var span=document.createElement('span');
+            span.innerHTML='X';
+            span.onclick=function(){
+                delCheck(this);
+                clearCheck(arr)
+            }
+            div.appendChild(span);
+        }
+        // 删除选择
+        function delCheck(spanDel){
+            var div=spanDel.parentNode;
+            choice.removeChild(div);
+        }
+    </script>
+</body>
+</html>

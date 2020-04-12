@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼图小游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            width: 600px;
+            height: 600px;
+            border: 1px solid pink;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .content div {
+            width: 198px;
+            height: 198px;
+            background-image: url(image/9ggbg1.jpg);
+            background-repeat: no-repeat;
+            display: inline-block;
+            position: absolute;
+            /* transition: top 0.25s,left 0.25s; */
+            transition: all 0.25s;
+        }
+
+        .box1 {
+            top: 1px;
+            left: 1px;
+            /* background-position: 0px 0px; */
+        }
+
+        .box2 {
+            top: 1px;
+            left: 201px;
+            /* background-position: -200px 0px; */
+        }
+
+        .box3 {
+            top: 1px;
+            left: 401px;
+            /* background-position: -400px 0px; */
+        }
+
+        .box4 {
+            top: 201px;
+            left: 1px;
+            /* background-position: 0px -200px; */
+        }
+
+        .box5 {
+            top: 201px;
+            left: 201px;
+            /* background-position: -200px -200px; */
+        }
+
+        .box6 {
+            top: 201px;
+            left: 401px;
+            /* background-position: -400px -200px; */
+        }
+
+        .box7 {
+            top: 401px;
+            left: 1px;
+            /* background-position: 0px -400px; */
+        }
+
+        .box8 {
+            top: 401px;
+            left: 201px;
+            /* background-position: -200px -400px; */
+        }
+
+        .box9 {
+            top: 401px;
+            left: 401px;
+            /* background-position: -400px -400px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content" id="content">
+        <!-- <div class="box box1"></div>
+        <div class="box box2"></div>
+        <div class="box box3"></div>
+        <div class="box box4"></div>
+        <div class="box box5"></div>
+        <div class="box box6"></div>
+        <div class="box box7"></div>
+        <div class="box box8"></div> -->
+
+    </div>
+    <script>
+        function Game(content) {
+            this.content = content;
+            // 定义宫格数组
+            this.latticeArr = [];
+            // 定义宫格的数量
+            this.cellCout = Math.pow(3, 2);
+            this.init();
+        }
+        //创建宫格
+        Game.prototype.createCell = function () {
+            for (var i = 0; i < this.cellCout; i++) {
+                this.latticeArr[i] = document.createElement('div');
+                if (i >= 0 && i < 3) {
+                    this.latticeArr[i].style.backgroundPosition = (-200 * i) + 'px 0px';
+                } else if (i >= 3 && i < 6) {
+                    this.latticeArr[i].style.backgroundPosition = (-200 * (i % 3)) + 'px -200px';
+                } else if (i >= 6 && i < 8) {
+                    this.latticeArr[i].style.backgroundPosition = (-200 * (i % 3)) + 'px -400px';
+                } else {
+                    this.latticeArr[i].style.backgroundPosition = '200px 400px';
+                }
+            }
+            console.log(this.latticeArr);
+        }
+
+        // 打乱宫格
+        Game.prototype.randomArray = function (arr) {
+            let i = arr.length;
+            while (i) {
+                let j = Math.floor(Math.random() * i--);
+                [arr[j], arr[i]] = [arr[i], arr[j]];
+            }
+            return arr;
+        }
+
+        // 将随机生成的宫格放到页面上
+        Game.prototype.addCellPage = function (arr) {
+            arr.length = arr.length;
+            for (var i = 0; i < arr.length; i++) {
+                arr[i].setAttribute('class', 'box' + (i + 1));
+                this.content.appendChild(arr[i]);
+            }
+        }
+
+        // 给每个绑定事件
+        Game.prototype.addEvent = function (arr) {
+            var that = this;
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].style.backgroundPosition == '200px 400px') {
+                    switch (i) {
+                        case 0:
+                            arr[1].onclick = arr[3].onclick = function () {
+                                that.move(that.latticeArr, this);
+                                arr[1].onclick = arr[3].onclick = null;
+                                if (that.isFinished(that)) { // 判断是否通过
+                                    alert('这游戏太难了O_o!')
+                                    return;
+                                }
+                                that.addEvent(that.latticeArr);
+                            }
+                            break;
+                        case 1:
+                            arr[0].onclick = arr[2].onclick = arr[4].onclick = function () {
+                                that.move(that.latticeArr, this);
+                                arr[0].onclick = arr[2].onclick = arr[4].onclick = null;
+                                if (that.isFinished(that)) { // 判断是否通过
+                                    alert('这游戏太难了O_o!')
+                                    return;
+                                }
+                                that.addEvent(that.latticeArr);
+                            }
+                            break;
+                        case 2:
+                            arr[1].onclick = arr[5].onclick = function () {
+                                that.move(that.latticeArr, this);
+                                arr[1].onclick = arr[5].onclick = null;
+                                if (that.isFinished(that)) { // 判断是否通过
+                                    alert('这游戏太难了O_o!')
+                                    return;
+                                }
+                                that.addEvent(that.latticeArr);
+                            }
+                            break;
+                        case 3:
+                            arr[0].onclick = arr[4].onclick = arr[6].onclick = function () {
+                                that.move(that.latticeArr, this);
+                                arr[0].onclick = arr[4].onclick = arr[6].onclick = null;
+                                if (that.isFinished(that)) { // 判断是否通过
+                                    alert('这游戏太难了O_o!')
+                                    return;
+                                }
+                                that.addEvent(that.latticeArr);
+                            }
+                            break;
+                        case 4:
+                            arr[1].onclick = arr[3].onclick = arr[5].onclick = arr[7].onclick = function () {
+                                that.move(that.latticeArr, this);
+                                arr[1].onclick = arr[3].onclick = arr[5].onclick = arr[7].onclick = null;
+                                if (that.isFinished(that)) { // 判断是否通过
+                                    alert('这游戏太难了O_o!')
+                                    return;
+                                }
+                                that.addEvent(that.latticeArr);
+                            }
+                            break;
+                        case 5:
+                            arr[2].onclick = arr[4].onclick = arr[8].onclick = function () {
+                                that.move(that.latticeArr, this);
+                                arr[2].onclick = arr[4].onclick = arr[8].onclick = null;
+                                if (that.isFinished(that)) { // 判断是否通过
+                                    alert('这游戏太难了O_o!')
+                                    return;
+                                }
+                                that.addEvent(that.latticeArr);
+                            }
+                            break;
+                        case 6:
+                            arr[3].onclick = arr[7].onclick = function () {
+                                that.move(that.latticeArr, this);
+                                arr[3].onclick = arr[7].onclick = null;
+                                if (that.isFinished(that)) { // 判断是否通过
+                                    alert('这游戏太难了O_o!')
+                                    return;
+                                }
+                                that.addEvent(that.latticeArr);
+                            }
+                            break;
+                        case 7:
+                            arr[4].onclick = arr[6].onclick = arr[8].onclick = function () {
+                                that.move(that.latticeArr, this);
+                                arr[4].onclick = arr[6].onclick = arr[8].onclick = null;
+                                if (that.isFinished(that)) { // 判断是否通过
+                                    alert('这游戏太难了O_o!')
+                                    return;
+                                }
+                                that.addEvent(that.latticeArr);
+                            }
+                            break;
+                        case 8:
+                            arr[5].onclick = arr[7].onclick = function () {
+                                that.move(that.latticeArr, this);
+                                arr[5].onclick = arr[7].onclick = null;
+                                if (that.isFinished(that)) { // 判断是否通过
+                                    alert('这游戏太难了O_o!')
+                                    return;
+                                }
+                                that.addEvent(that.latticeArr);
+                            }
+                            break;
+                    }
+                }
+            }
+
+
+        }
+        // 移动小宫格的位置
+        Game.prototype.move = function (arr, a) {
+            var kong;
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].style.backgroundPosition == '200px 400px') {
+                    kong = arr[i].style.backgroundPosition;
+                    arr[i].style.backgroundPosition = a.style.backgroundPosition;
+                    a.style.backgroundPosition = kong;
+                }
+            }
+
+
+        }
+        // 判断是否通关
+        Game.prototype.isFinished = function (that) {
+            if (that.latticeArr[0].style.backgroundPosition == '0px 0px' && that.latticeArr[1].style
+                .backgroundPosition == '-200px 0px' && that.latticeArr[2].style.backgroundPosition ==
+                '-400px 0px' && that.latticeArr[3].style.backgroundPosition == '0px -200px' && that.latticeArr[4]
+                .style.backgroundPosition == '-200px -200px' && that.latticeArr[5].style.backgroundPosition ==
+                '-400px -200px' && that.latticeArr[6].style.backgroundPosition == '0px -400px' && that.latticeArr[7]
+                .style.backgroundPosition == '-200px -400px') {
+                return true;
+            }
+        }
+        // 初始化的方法
+        Game.prototype.init = function () {
+            this.createCell();
+            this.randomArray(this.latticeArr);
+            this.addCellPage(this.latticeArr);
+            this.addEvent(this.latticeArr);
+        }
+        window.onload = function () {
+            var content = document.getElementById('content');
+            var game = new Game(content);
+        }
+    </script>
+</body>
+
+</html>

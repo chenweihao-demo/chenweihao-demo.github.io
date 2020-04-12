@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/ltstyle.css">
+</head>
+<body>
+    <div class="content">
+        <div class="message-display" id="messageDisplay">
+            <div><p class="message-pao-l">吃鸡吗</p></div>
+        </div>
+        <div class="message-sending">
+            <div class="sending-content">
+                <textarea id="sendContent"></textarea>
+            </div>
+            <button class="sending-btn" id="sendBtn">发送</button>
+            <span>发送的内容不能为空</span>
+        </div>
+    </div>
+    <script>
+        // 封装聊天的构造函数
+        function Char(messageDisplay,sendContent,sendBtn){
+            this.messageDisplay=messageDisplay;
+            this.sendContent=sendContent;
+            this.sendBtn=sendBtn;
+            this.init();
+        }
+        // 定义初始化函数init
+        Char.prototype.init=function(){
+            var that = this;
+            this.sendBtn.onmousedown=function(e){
+                if(that.mouseLeft(e)){
+                    that.sendBtn.setAttribute('class','active');
+                }
+                that.sendBtn.onmouseup=function(e){
+                    if(that.mouseLeft){
+                        that.sendBtn.removeAttribute('class','active');
+                        that.updateMessageDisplay();   
+                    }
+                }
+            }
+            this.chatKeyDown();
+        }
+        //定义判断鼠标是否为左键
+        Char.prototype.mouseLeft=function(evb){
+            var res = evb ? false:true;
+            if(evb.button==0||(res&&evb.button==1)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //当快捷键按下则发送消息
+        Char.prototype.chatKeyDown = function(){
+            var that = this;
+            document.onkeydown = function(e){
+                var ev = e || window.event;
+                if(ev.keyCode == 13){
+                    ev.preventDefault ? ev.preventDefault() : returnValue = true;
+                    that.updateMessageDisplay()
+                }
+            }
+        }
+        
+        // 发送消息 更新聊天框消息
+        Char.prototype.updateMessageDisplay=function(){
+            var updateContent =this.sendContent.value;
+            var tips = this.sendBtn.nextElementSibling;
+            var div = document.createElement('div');
+            var p = document.createElement('p');
+            if(updateContent){
+                p.setAttribute('class','message-pao-r');
+                p.innerHTML=updateContent;
+                div.appendChild(p);
+                this.messageDisplay.appendChild(div);
+                // 清除输入框内容
+                this.sendContent.value='';
+                tips.style.display = 'none';
+            }else{
+                tips.style.display = 'block';
+            }
+            
+        }
+        window.onload=function(){
+            // 获取聊天框
+            var messageDisplay= document.getElementById('messageDisplay');
+            // 获取输入框
+            var sendContent =document.getElementById('sendContent');
+            // 获取发送按钮
+            var sendBtn =document.getElementById('sendBtn');
+            
+            var cher =new Char(messageDisplay,sendContent,sendBtn);
+        }
+    </script>
+</body>
+</html>

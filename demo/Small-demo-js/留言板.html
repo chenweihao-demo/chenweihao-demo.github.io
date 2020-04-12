@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .content {
+            width: 750px;
+            margin: 0 auto;
+        }
+
+        .get-message {
+            height: 260px;
+            padding-top: 30px;
+        }
+
+        .get-message>p {
+            height: 30px;
+        }
+
+        .get-message>textarea {
+            width: 100%;
+            box-sizing: border-box;
+            height: 150px;
+            resize: none;
+            padding: 5px;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .get-message>button {
+            width: 100px;
+            height: 50px;
+            background-color: #e2526f;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            margin-right: 5px;
+        }
+
+        .display-message {
+            width: 100%;
+        }
+
+        .display-message>div {
+            width: 100%;
+            height: 82px;
+            box-sizing: border-box;
+            border: 1px solid #848484;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .display-message>div>img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .display-message>div>span {
+            display: inline-block;
+            width: 550px;
+            /* background-color: red; */
+            vertical-align: middle;
+            white-space: normal;
+            word-break: break-all;
+        }
+        .display-message>div>i{
+            position: absolute;
+            bottom: 5px;
+            right: 120px;
+            font-size: 14px;
+        }
+        .display-message>div>button {
+            width: 100px;
+            height: 30px;
+            background-color: #e2526f;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="get-message">
+            <p><span class="fl">你想对楼主说点什么</span>
+                <span class="fr" id="tips">你最多还可以输入50个字符</span></p>
+            <textarea id="setMessage"></textarea>
+            <button id="sendBtn" class="fr">发送</button>
+        </div>
+        <div class="display-message" id="displayMessage">
+            <!-- <div>
+                <img src="image/touxiang.png" alt="">
+                <span>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</span>
+                <i>2020/2/27上午11:38:29</i>
+                <button>删除</button>
+            </div> -->
+        </div>
+    </div>
+    <script>
+        function MessageBoard(tips, setMessage, sendBtn, displayMessage) {
+            this.tips = tips;
+            this.setMessage = setMessage;
+            this.sendBtn = sendBtn;
+            this.displayMessage = displayMessage;
+            this.init();
+
+        }
+        // 监控输入文本域的字数
+        MessageBoard.prototype.monitorTextarea=function(){
+            var that = this;
+            this.setMessage.onchange=this.setMessage.onkeyup=function(e){
+                var ev = e || window.event;
+                var str = that.setMessage.value;
+                if(str.length>=50){
+                    that.setMessage.value = that.setMessage.value.substr(0, 49);
+                    tips.innerHTML='你最多还可以输入0个字符';
+                }else{
+                    tips.innerHTML='你最多还可以输入'+(50-str.length)+'个字符';
+                }
+                if(ev.keyCode == 13){
+                    ev.preventDefault ? ev.preventDefault() : returnValue = true;
+                    that.addCellPage(that.setMessage.value.length-1);
+                }
+            }
+        }
+        // 发送按钮绑定事件
+        MessageBoard.prototype.addEvent=function(){
+            var that = this;
+            this.sendBtn.onclick=function(){
+                // 留言添加到页面显示
+                that.addCellPage(that.setMessage.value.length);
+            }
+        }
+        // 获取文本域内容加到localStorage缓存
+        MessageBoard.prototype.setLocalStorage=function(){
+            var messageLi = window.localStorage.getItem('messageLi');
+            var list =(messageLi!=null) ? JSON.parse(messageLi):[];
+            var date1 = new Date();
+            var addItem = {
+               time:date1.toLocaleDateString()+date1.toLocaleTimeString(),
+               message:this.setMessage.value
+            }
+            list.push(addItem);
+            window.localStorage.setItem('messageLi',JSON.stringify(list));
+        }
+        // 发送消息显示在页面
+        MessageBoard.prototype.addCellPage=function(str){
+            if(str==0){//文本域为空，return出去
+                this.setMessage.value='';
+                return;
+            }
+            this.setLocalStorage();
+            var messageLi = window.localStorage.getItem('messageLi');
+            var arr = (messageLi!=null) ? JSON.parse(messageLi):[];
+            if(arr==[]){
+                return;
+            }else{
+                var div = document.createElement('div');
+                this.displayMessage.appendChild(div);
+                var img =document.createElement('img');
+                img.setAttribute('src','image/touxiang.png')
+                div.appendChild(img);
+
+                var span =document.createElement('span');
+                span.innerHTML=arr[arr.length-1].message;
+                div.appendChild(span);
+
+                var iE =document.createElement('i');
+                iE.innerHTML=arr[arr.length-1].time;
+                div.appendChild(iE);
+
+                var button = document.createElement('button');
+                button.innerHTML='删除';
+                this.deleteEvent(arr[arr.length-1].time,button,displayMessage,div);
+                div.appendChild(button);
+            }
+            // 清空文本域
+            this.setMessage.value='';
+            this.tips.innerHTML='你最多还可以输入50个字符';
+        }
+        // localStorage缓存留言添加到页面显示addCellPage
+        MessageBoard.prototype.updateCellPage=function(){
+            var messageLi = window.localStorage.getItem('messageLi');
+            var arr = (messageLi!=null) ? JSON.parse(messageLi):[];
+            if(arr==[]){
+                return;
+            }
+            for (var i=0;i<arr.length;i++){
+                var div = document.createElement('div');
+                this.displayMessage.appendChild(div);
+                var img =document.createElement('img');
+                img.setAttribute('src','image/touxiang.png')
+                div.appendChild(img);
+
+                var span =document.createElement('span');
+                span.innerHTML=arr[i].message;
+                div.appendChild(span);
+
+                var iE =document.createElement('i');
+                iE.innerHTML=arr[i].time;
+                div.appendChild(iE);
+
+                var button = document.createElement('button');
+                button.innerHTML='删除';
+                this.deleteEvent(arr[i].time,button,displayMessage,div);
+                div.appendChild(button);
+            }
+        }
+        // 给删除按钮绑定事件
+        MessageBoard.prototype.deleteEvent=function(time,delBtn,displayMessage,div){
+            var flag=time;
+            var that =this;
+            delBtn.onclick=function(){
+                var messageLi = window.localStorage.getItem('messageLi');
+                var arr =JSON.parse(messageLi);
+                for (var i = 0;i<arr.length;i++){
+                    if(arr[i].time==flag){
+                        arr.splice(i,1);
+                        window.localStorage.setItem('messageLi',JSON.stringify(arr));
+                        displayMessage.removeChild(div);
+                        return;
+                    }
+                }
+                
+            }
+        } 
+        // 初始化init
+        MessageBoard.prototype.init=function(){
+            this.monitorTextarea();
+            this.updateCellPage();
+            this.addEvent();
+        }
+        window.onload = function () {
+            var tips = document.getElementById('tips');
+            var setMessage = document.getElementById('setMessage');
+            var sendBtn = document.getElementById('sendBtn');
+            var displayMessage = document.getElementById('displayMessage');
+            var messageBoard = new MessageBoard(tips, setMessage, sendBtn, displayMessage);
+        }
+    </script>
+</body>
+
+</html>

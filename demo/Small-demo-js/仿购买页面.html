@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仿购买页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        i {
+            font-style: normal;
+        }
+
+        .content {
+            width: 500px;
+            margin: 10px auto;
+        }
+
+        .change-type {
+            width: 100%;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .change-type>div {
+            padding: 10px 0;
+        }
+
+        .change-type div button {
+            display: inline-block;
+            padding: 5px;
+            position: relative;
+            outline: none;
+        }
+
+        .no-active {
+            border: 2px solid transparent;
+        }
+
+        .active {
+            border: 2px solid #ff6600;
+        }
+
+        .active::before {
+            content: '';
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            background: url(image/on.png) no-repeat;
+            width: 15px;
+            height: 14px;
+        }
+
+        .price-box {
+            padding: 20px 0;
+        }
+
+        .price-box span {
+            color: #ff6600;
+            font-size: 18px;
+        }
+
+        .content>a {
+            display: block;
+            width: 300px;
+            height: 50px;
+            color: #ffffff;
+            background-color: #ff6600;
+            text-decoration: none;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="change-type">
+            <div class="phone-type">
+                <i>型号</i>
+                <button class="no-active active" value="0">5.0英寸</button>
+                <button class="no-active" value="1">5.5英寸</button>
+            </div>
+            <div class="phone-color">
+                <i>颜色</i>
+                <button class="no-active active" value="2">银色</button>
+                <button class="no-active" value="3">金色</button>
+                <button class="no-active" value="4">深空灰色</button>
+            </div>
+            <div class="phone-memory">
+                <i>内存</i>
+                <button class="no-active active" value="5">64GB</button>
+                <button class="no-active" value="6">128GB</button>
+                <button class="no-active" value="7">256GB</button>
+            </div>
+            <div class="phone-version">
+                <i>版本</i>
+                <button class="no-active active" value="8">公开版</button>
+                <button class="no-active" value="9">移动赠费版</button>
+                <button class="no-active" value="10">联通合约版</button>
+            </div>
+        </div>
+        <div class="price-box">
+            <i>价格：</i>
+            <span>￥ </span>
+            <span id="price"></span>
+        </div>
+        <a href="#">立即购买</a>
+    </div>
+    <script>
+        var spanLi = document.getElementsByClassName('change-type')[0].getElementsByTagName('button');
+        var price = document.getElementById('price');
+        console.log(spanLi)
+        var phType = 0;
+        var phColor = 0;
+        var phMemory = 0;
+        var phVersion = 0;
+        setPrice()
+        for(var i=0;i<spanLi.length;i++){
+            spanLi[i].onclick=function(){
+                if(this.value<2){
+                    for(var j =0;j<2;j++){
+                        spanLi[j].setAttribute('class','no-active');
+                    }
+                }else if(this.value>1&&this.value<5){
+                    for(var j =2;j<5;j++){
+                        spanLi[j].setAttribute('class','no-active');
+                    }
+                }else if(this.value>4&&this.value<8){
+                    for(var j =5;j<8;j++){
+                        spanLi[j].setAttribute('class','no-active');
+                    }
+                }else if(this.value>7&&this.value<11){
+                    for(var j =8;j<11;j++){
+                        spanLi[j].setAttribute('class','no-active');
+                    }
+                }
+                this.setAttribute('class','no-active active');
+                setPrice();
+            }
+        }
+        function setPrice() {
+            for (var i = 0; i < spanLi.length; i++) {
+                switch (i) {
+                    case 0:
+                        phType = (spanLi[i].className == 'no-active active') ? 2000 : phType;
+                        break;
+                    case 1:
+                        phType = (spanLi[i].className == 'no-active active') ? 3000 : phType;
+                        break;
+                    case 2:
+                        phColor = (spanLi[i].className == 'no-active active') ? 100 : phColor;
+                        break;
+                    case 3:
+                        phColor = (spanLi[i].className == 'no-active active') ? 200 : phColor;
+                        break;
+                    case 4:
+                        phColor = (spanLi[i].className == 'no-active active') ? 50 : phColor;
+                        break;
+                    case 5:
+                        phMemory = (spanLi[i].className == 'no-active active') ? 500 : phMemory;
+                        break;
+                    case 6:
+                        phMemory = (spanLi[i].className == 'no-active active') ? 800 : phMemory;
+                        break;
+                    case 7:
+                        phMemory = (spanLi[i].className == 'no-active active') ? 1000 : phMemory;
+                        break;
+                    case 8:
+                        phVersion = (spanLi[i].className == 'no-active active') ? 199 : phVersion;
+                        break;
+                    case 9:
+                        phVersion = (spanLi[i].className == 'no-active active') ? 99 : phVersion;
+                        break;
+                    case 10:
+                        phVersion = (spanLi[i].className == 'no-active active') ? 49 : phVersion;
+                        break;
+                }
+            }
+            var res =phType+phColor+phMemory+phVersion;
+            price.innerHTML=res.toFixed(2)+'';
+        }
+    </script>
+</body>
+
+</html>

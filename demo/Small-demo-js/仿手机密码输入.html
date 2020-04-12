@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0;
+        }
+        body{
+            /* background-color: #717171; */
+        }
+        .content {
+            width: 100%;
+            height: 100%;
+            margin: 10% auto;
+            background-color: transparent;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .content>div {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .content>div>button {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .pwd-content {
+            width: 100%;
+            height: 50%;
+            /* background-color: red; */
+            position: fixed;
+            top: 100%;
+            left: 0;
+            border: 1px solid #eeeeee;
+            background-color: white;
+        }
+
+        .x-box {
+            height: 8%;
+            /* background-color: salmon; */
+        }
+
+        .x-box>span {
+            font-size: 22px;
+        }
+
+        .pwd-content>p {
+            text-align: center;
+        }
+
+        .pwd-content>p>span {
+            color: tan;
+        }
+
+        .display-box {
+            width: 100%;
+            text-align: center;
+            /* background-color: teal; */
+            /* margin: 10% 0; */
+        }
+
+        .display-box>ul {
+            display: inline-block;
+            padding: 5% 0;
+            /* box-sizing: border-box; */
+        }
+
+        .display-box>ul>li {
+            float: left;
+            width: 50px;
+            height: 50px;
+            box-sizing: border-box;
+            background-color: white;
+            border: 1px solid #e8e8e8;
+            text-align: center;
+        }
+        .display-box>ul>li>img{
+            width: 40px;
+            padding-top: 3px;
+        }
+        .keyboard-box {
+            width: 100%;
+            height: 65%;
+            /* background-color: yellow; */
+            text-align: center;
+        }
+
+        .keyboard-box>ul {
+            height: 100%;
+            width: 99%;
+            display: inline-block;
+        }
+
+        .keyboard-box>ul>li {
+            box-sizing: border-box;
+            width: 33%;
+            height: 25%;
+            float: left;
+            border: 1px solid #e8e8e8;
+            text-align: center;
+            font-size: 26px;
+            line-height: 205%;
+            margin-left: 1px;
+        }
+        .keyboard-box>ul>li:nth-child(10),.keyboard-box>ul>li:nth-child(12){
+            background-color: #e3e8ee;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div><button id="btn1">打开弹框</button></div>
+        <div><button id="btn2">关闭弹框</button></div>
+        <div><button id="btn3">清除密码</button></div>
+    </div>
+
+    <div class="pwd-content" id="pwdContent">
+        <div class="x-box"><span class="fr" id="spanX">×</span></div>
+        <p>你将支付<span>30</span>元，请输入支付密码</p>
+        <div class="display-box" id="displayBox">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="keyboard-box">
+            <ul>
+                <li id="li1">1</li>
+                <li id="li2">2</li>
+                <li id="li3">3</li>
+                <li id="li4">4</li>
+                <li id="li5">5</li>
+                <li id="li6">6</li>
+                <li id="li7">7</li>
+                <li id="li8">8</li>
+                <li id="li9">9</li>
+                <li id="liqc">清除</li>
+                <li id="li0">0</li>
+                <li id="lix">x</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var body =document.getElementsByTagName('body')[0];
+        var btn1= document.getElementById('btn1');
+        var btn2= document.getElementById('btn2');
+        var btn3= document.getElementById('btn3');
+        var spanX= document.getElementById('spanX');
+        var pwdContent =document.getElementById('pwdContent');
+        var displayBox =document.getElementById('displayBox');
+        var pwdLi = displayBox.getElementsByTagName('li');
+        var li1=document.getElementById('li1');
+        var li2=document.getElementById('li2');
+        var li3=document.getElementById('li3');
+        var li4=document.getElementById('li4');
+        var li5=document.getElementById('li5');
+        var li6=document.getElementById('li6');
+        var li7=document.getElementById('li7');
+        var li8=document.getElementById('li8');
+        var li9=document.getElementById('li9');
+        var li0=document.getElementById('li0');
+        var liqc=document.getElementById('liqc');
+        var lix=document.getElementById('lix');
+        var pwd=[];//密码储存
+        var flag=0;
+        btn1.onclick=function(){
+            pwdContent.style.top='50%';
+            body.style.backgroundColor='#717171';
+        }
+        btn2.onclick=function(){
+            flag=clearPwd(flag);
+            pwdContent.style.top='100%';
+            body.style.backgroundColor='#ffffff';
+            
+        }
+        btn3.onclick=function(){
+            flag=clearPwd(flag);
+        }
+        spanX.onclick=function(){
+            flag=clearPwd(flag);
+            pwdContent.style.top='100%';
+            body.style.backgroundColor='#ffffff';
+            
+        }
+        li0.onclick=li1.onclick=li2.onclick=li3.onclick=li4.onclick=li5.onclick=li6.onclick=li7.onclick=li8.onclick=li9.onclick=function(){
+            if(flag==6){
+                return;
+            }
+            pwd.push(parseInt(this.innerHTML));
+            flag+=1;
+            addPwd(flag)
+        }
+        lix.onclick=function(){
+            if(flag==0){
+                return;
+            }
+            flag-=1;
+            delPwd(flag)
+        }
+        liqc.onclick=function(){
+            flag=clearPwd(flag);
+        }
+        // 添加密码显示小圆点
+        function addPwd(flag){ 
+            var img =document.createElement('img');
+            img.setAttribute('src','image/dian.jpg')
+            for(var i=0;i<flag;i++){
+                pwdLi[i].appendChild(img);
+            } 
+        }
+        // 单个删除小圆点
+        function delPwd(flag){
+            pwd.length=pwd.length-1;
+            pwdLi[flag].removeChild(pwdLi[flag].firstElementChild);
+        }
+        // 清除全部小圆点
+        function clearPwd(flag){
+            for(var i =0;i<flag;i++){
+                pwdLi[i].removeChild(pwdLi[i].firstElementChild);
+            }
+            pwd.length=0;
+            return flag=0;
+        }
+    </script>
+
+</body>
+
+</html>

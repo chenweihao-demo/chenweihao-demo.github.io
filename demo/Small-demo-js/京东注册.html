@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/jdcss.css">
+</head>
+<body>
+	<!--头部-->
+    <div class="header">
+        <a class="logo" href="##"></a>
+        <div class="desc">欢迎注册</div>
+    </div>
+     <!-- 内容 -->
+     <div class="w">
+    	<div class="register">
+    		<!--用户名-->
+    		<div class="register-box">
+    			<div class="box default">
+    				<label for="userName">用&nbsp;户&nbsp;名</label>
+    				<input type="text" id="userName" placeholder="您的用户名和登录名"/>
+    				<i></i>
+    			</div>
+    			<div class="tip">
+    				<i></i>
+    				<span></span>
+    			</div>
+    		</div>
+    		<!--设置密码-->
+    		<div class="register-box">
+    			<div class="box default">
+    				<label for="pwd">设 置 密 码</label>
+    				<input type="password" id="pwd" placeholder="建议至少两种字符组合"/>
+    				<i></i>
+    			</div>
+    			<div class="tip">
+    				<i></i>
+    				<span></span>
+    			</div>
+    		</div>
+    		<!--确认密码-->
+    		<div class="register-box">
+    			<div class="box default">
+    				<label for="pwd2">确 认 密 码</label>
+    				<input type="password" id="pwd2" placeholder="请再次输入密码"/>
+    				<i></i>
+    			</div>
+    			<div class="tip">
+    				<i></i>
+    				<span></span>
+    			</div>
+    		</div>
+    		<div class="register-box">
+    			<div class="box default">
+    				<label for="mobile">手 机 号</label>
+    				<input type="text" id="mobile" placeholder="建议使用常用手机"/>
+    				<i></i>
+    			</div>
+    			<div class="tip">
+    				<i></i>
+    				<span></span>
+    			</div>
+            </div>
+            <!--验证码-->
+    		<div class="register-box">
+    			<div class="box default">
+    				<label for="yzmName">验 证 码</label>
+                    <input type="text" id="yzmName" placeholder="请输入验证码"/>
+                    <span class="yzmSpan" id="yzmSpan"></span>
+    				<i></i>
+    			</div>
+    			<div class="tip">
+    				<i></i>
+    				<span class=""></span>
+    			</div>
+    		</div>
+    		 <!--注册协议-->
+    		<div class="register-box xieyi">
+    			<div class="box default">
+    				<input type="checkbox" id="ck" />
+    				<span>我已阅读并同意<a href="##">《京东用户注册协议》</a><a href="##">《隐私政策》</a></span>
+    			</div>
+    			<div class="tip">
+    				<i></i>
+    				<span></span>
+    			</div>
+    		</div>
+    		<!--注册-->
+    		<a class="buttonA" href="#" id="btn">立即注册</a>
+    	</div>
+    <script>
+		var regs = {
+			userNameReg: /^(([\u4e00-\u9fa5])|[a-zA-Z0-9-_]){4,20}$/,
+			pwdReg: /^.{6,20}$/,
+			mobileReg:/^1(5|3|8|4|7){1}\d{9}$/
+		}
+		var userName= document.getElementById('userName');
+		var pwd =document.getElementById('pwd');
+		var pwd2 =document.getElementById('pwd2');
+		var mobile=document.getElementById('mobile');
+		var yzmName = document.getElementById('yzmName');
+		var yzmSpan=document.getElementById('yzmSpan');
+		var ck=document.getElementById('ck');
+		var btn = document.getElementById('btn');
+		// 标志
+		var userNameFlag,pwdFlag,pwd2Flag,mobileFlag,yzmNameFlag;
+		// 生成验证码
+		queryCode();
+		// 用户名
+		userName.onkeyup=function(){
+			var value = userName.value;
+			var box = userName.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "用户名不能为空";
+				userNameFlag = false;
+			} else if(regs.userNameReg.test(value)) {
+				box.className = "box right";
+				tip.className = "tip hide";
+				userNameFlag = true;
+			} else {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "格式错误，仅支持汉字、字母、数字、“-”“_”的组合";
+				userNameFlag = false;
+			}
+		}
+		userName.onfocus=function(){
+			var value = userName.value;
+			var box = userName.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+					box.className = "box";
+					tip.className = "tip default";
+					span.innerHTML = "支持汉字、字母、数字、“-”“_”的组合，4-20个字符";
+					userNameFlag = false;
+			}
+		}
+		userName.onblur=function(){
+			var value = userName.value;
+			var box = userName.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+					box.className = "box error";
+					tip.className = "tip error";
+					span.innerHTML = "用户名不能为空";
+					userNameFlag = false;
+			}
+		}
+		
+		// 密码
+		pwd.onkeyup=function(){
+			var value = pwd.value;
+			var box = pwd.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "密码不能为空";
+				pwdFlag = false;
+			} else if(regs.pwdReg.test(value)) {
+				box.className = "box right";
+				tip.className = "tip hide";
+				pwdFlag = true;
+			} else {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "密码长度应在6-20个字符之间";
+				pwdFlag = false;
+			}
+		}
+		pwd.onfocus=function(){
+			var value = pwd.value;
+			var box = pwd.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box";
+				tip.className = "tip default";
+				span.innerHTML = "建议使用字母、数字和符号两种以上的组合,6-20个字符";
+				pwdFlag = false;
+			}
+		}
+		pwd.onblur=function(){
+			var value = pwd.value;
+			var box = pwd.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "密码不能为空";
+				pwdFlag = false;
+			}
+		}
+		// 确认密码
+		pwd2.onkeyup=function(){
+			var value = pwd2.value;
+			var box = pwd2.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "请再次输入密码";
+				pwd2Flag = false;
+			} else if(value==pwd.value) {
+				box.className = "box right";
+				tip.className = "tip hide";
+				pwd2Flag = true;
+			} else {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "两次密码不一致";
+				pwd2Flag = false;
+			}
+		}
+		pwd2.onfocus=function(){
+			var value = pwd2.value;
+			var box = pwd2.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box";
+				tip.className = "tip default";
+				span.innerHTML = "请再次输入密码";
+				pwd2Flag = false;
+			}
+		}
+		pwd2.onblur=function(){
+			var value = pwd2.value;
+			var box = pwd2.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "两次密码不一致";
+				pwd2Flag = false;
+			}
+		}
+		// 手机号
+		mobile.onkeyup=function(){
+			var value = mobile.value;
+			var box = mobile.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "请输入手机号";
+				mobileFlag = false;
+			} else if(regs.mobileReg.test(value)) {
+				box.className = "box right";
+				tip.className = "tip hide";
+				mobileFlag = true;
+			} else {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "请输入有效的手机号";
+				mobileFlag = false;
+			}
+		}
+		mobile.onfocus=function(){
+			var value = mobile.value;
+			var box = mobile.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box";
+				tip.className = "tip default";
+				span.innerHTML = "请输入有效的手机号";
+				mobileFlag = false;
+			}
+		}
+		mobile.onblur=function(){
+			var value = mobile.value;
+			var box = mobile.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "手机号不能为空";
+				mobileFlag = false;
+			}
+		}
+		// 验证码
+		yzmName.onkeyup=function(){
+			var value = yzmName.value;
+			var box = yzmName.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "请输入验证码";
+				yzmNameFlag = false;
+			} else if(value==yzmSpan.innerHTML) {
+				box.className = "box right";
+				tip.className = "tip hide";
+				yzmNameFlag = true;
+			} else {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "请输入正确的验证码";
+				yzmNameFlag = false;
+			}
+		}
+		yzmName.onfocus=function(){
+			var value = yzmName.value;
+			var box = yzmName.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box";
+				tip.className = "tip default";
+				span.innerHTML = "请输入正确的验证码";
+				yzmNameFlag = false;
+			}
+		}
+		yzmName.onblur=function(){
+			var value = yzmName.value;
+			var box = yzmName.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value=="") {
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "验证码不能为空";
+				yzmNameFlag = false;
+			}
+		}
+		// 更新验证码
+		yzmSpan.onclick=function(){
+			queryCode();
+			var value = yzmName.value;
+			var box = yzmName.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(value!=yzmSpan.innerHTML){
+				box.className = "box error";
+				tip.className = "tip error";
+				span.innerHTML = "请输入正确的验证码";
+				yzmNameFlag = false;
+			}
+			
+		}
+		// 协议
+		ck.onclick = function() {
+			var box = ck.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(ck.checked) {
+				tip.className = "tip hide";
+			}
+		}
+		// 注册按钮
+		btn.onclick=function(){
+			var box = ck.parentNode;
+			var tip = box.nextElementSibling;
+			var span = tip.lastElementChild;
+			if(ck.checked) {
+				if(userNameFlag&&pwdFlag&&pwd2Flag&&mobileFlag&&yzmNameFlag) {
+					this.href='注册成功.html';
+				} else {
+					return false;
+				}
+			} else {
+				tip.className = "tip error";
+				span.innerHTML = "请同意协议";
+				return false;
+			}
+		}
+		// 生成验证码
+		function queryCode() {
+			let area = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			let result = "";
+			for (let i = 0; i < 4; i++) {
+				let ran = Math.round(Math.random() * 61);
+				result += area.charAt(ran);
+			}
+			yzmSpan.innerHTML = result;
+		}
+    </script>
+</body>
+</html>

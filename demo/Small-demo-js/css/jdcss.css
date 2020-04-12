@@ -1,0 +1,163 @@
+*{
+    margin:0;
+    padding:0;
+}
+i{
+    font-style: normal;
+}
+a{
+    text-decoration: none;
+}
+input{
+    outline: none;
+    border:none;
+}
+body{
+    width:100%;
+    font-size: 14px;
+}
+/*版心*/
+.w{
+    width:1210px;
+    margin:0 auto;
+    
+}
+/*头部*/
+.header{
+    width:100%;
+    height: 110px;
+    box-shadow: 10px 10px 10px rgba(111,111,111,.5);
+    position: relative;
+}
+/*Logo*/
+.header .logo{
+    display: inline-block;
+    width: 160px;
+    height:50px;
+    background: url(../image/icon.png) no-repeat;
+    position: absolute;
+    top:20px;
+    left:20px;
+}
+.header .desc{
+    font-size: 18px;
+    line-height: 34px;
+    border-left: 1px solid #ccc;
+    position: absolute;
+    left: 200px;
+    top:28px;
+    padding-left: 20px;
+    font-weight:bold;
+}
+/*-注册*/
+.register{
+	width: 400px;
+	margin: 0 auto;
+	padding-top:40px;
+	position: relative;
+}
+.register-box{
+	width:100%;
+	height: 52px;
+	padding-bottom: 30px;
+}
+.register-box .box{
+	width:100%;
+	height:100%;
+	line-height: 52px;
+	padding-left: 10px;
+	border: 1px solid #ccc;
+	position: relative;
+}
+.register-box .box.error{
+	border:1px solid red;
+}
+.register-box .box input{
+	width:200px;
+	font-size:16px;
+	padding-left: 20px;
+}
+.register-box .box.right i{
+	width:18px;
+	height: 18px;
+	background: url(../image/icon.png) no-repeat 1px -116px;
+	position: absolute;
+	top:50%;
+	margin-top: -10px;
+	right: -23px;
+}
+.register-box .tip {
+	width:100%;
+	line-height: 30px;
+	font-size: 12px;
+}
+.register-box .tip i{
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.register-box .tip span{
+	color: #CCCCCC;
+}
+.register-box .tip.hide{
+	display: none;
+}
+.register-box .tip.default i {
+	background: url(../image/icon.png) no-repeat 1px -99px;
+}
+.register-box .tip.default span{
+	color: #ccc;
+}
+.register-box .tip.error i {
+	background: url(../image/icon.png) no-repeat -16px -99px;
+}
+.register-box .tip.error span{
+	color: red;
+}
+.register-box.xieyi{
+	width:100%;
+	height: 20px;
+	padding-bottom: 30px;
+}
+.register-box.xieyi .box{
+	line-height: normal;
+	padding: 0;
+	border: none;
+}
+.register-box.xieyi .box.error{
+	line-height: normal;
+	padding: 0;
+	border: 1px solid red;
+}
+.register-box.xieyi .box input{
+	width: auto;
+}
+/*注册*/
+.register .buttonA{
+	display: block;
+	width: 100%;
+	height: 40px;
+	font:bold 18px/40px "宋体";
+	color: white;
+    background-color: #e2231a;
+	text-align: center;
+	line-height: 40px;
+}
+.register .buttonA:hover{
+	background-color: #c81623;
+}
+/* 验证码 */
+.yzmSpan{
+    display: inline-block;
+    float: right;
+    background-color: #000000;
+    color: white;
+    font-size: 18px;
+    height: 50px;
+    width: 100px;
+    margin-top: 1px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
