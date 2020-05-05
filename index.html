@@ -15,6 +15,16 @@
 </head>
 
 <body>
+    <div id="loading">
+        <img src="./image/loading.svg" alt="loading.." />
+    </div>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery(window).load(function () { //load函数
+                jQuery("#loading").hide();
+            });
+        });
+    </script>
     <!-- Swiper -->
     <div class="swiper-container swiper-container1">
         <div class="swiper-wrapper">
