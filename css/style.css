@@ -8,6 +8,7 @@ html {
     width: 100%;
     height: 100%;
     color: #ffffff;
+    /* background-color: rgba(82, 90, 207, 0.384); */
 }
 
 body {
@@ -365,65 +366,18 @@ a {
     display: flex;
 }
 
-.skills-content svg {
-    margin: auto;
+.skills-content>.pic-skills {
+    flex: 1;
 }
 
-.skills-content svg path,
-.skills-content svg text {
-    transition: all 0.3s cubic-bezier(0.71, -0.33, 0, 2.11);
-}
-
-.skills-content>ul {
-    display: inline-block;
-    width: 500px;
-    margin: auto;
-}
-
-.skills-content>ul>li {
-    padding-top: 20px;
-}
-
-.skills-content>ul>li>div {
-    width: 400px;
-    height: 30px;
-    border-radius: 5px;
-    background-color: #bdc3c7;
-}
-
-.skills-html {
-    height: 100%;
-    width: 88%;
-    background-color: #d35400;
-    border-radius: 5px;
-}
-
-.skills-css {
-    height: 100%;
-    width: 84%;
-    background-color: #3498db;
-    border-radius: 5px;
-}
-
-.skills-js {
-    height: 100%;
-    width: 80%;
-    background-color: #1abc9c;
-    border-radius: 5px;
-}
-
-.skills-jq {
-    height: 100%;
-    width: 90%;
-    background-color: #58b324;
-    border-radius: 5px;
-}
-
-.skills-bs {
-    height: 100%;
-    width: 70%;
-    background-color: #b2db1c;
-    border-radius: 5px;
+.skills-content>.context-box {
+    flex: 1;
+    text-align: justify;
+    font-size: 16px;
+    line-height: 32px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    border-radius: 10px;
 }
 
 /* 项目经验 */
@@ -486,9 +440,16 @@ a {
     background: url('../image/models.png') no-repeat;
     background-size: cover;
 }
-.mypag2{
+
+.swiper-container2>.swiper-wrapper>div:nth-child(5) {
+    background: url('../image/music163.png') no-repeat;
+    background-size: cover;
+}
+
+.mypag2 {
     color: lightsteelblue;
 }
+
 .project-btn {
     padding: 20px;
 

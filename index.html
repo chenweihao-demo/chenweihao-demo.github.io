@@ -10,6 +10,8 @@
     <script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
     <link rel="stylesheet" href="css/style.css">
     <script src="./js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>
+    <script src="./js/westeros.js"></script>
 </head>
 
 <body>
@@ -60,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="resume-content-b">
-                                <p>你好,我叫陈伟灏,位于广东茂名,我是物联网应用技术专业,经常浏览网站对于网页制作更是产生了浓厚的兴趣,随即自学了前端开发,也参加过培训进行系统学习,今后的职业规划向着全栈多方位发展,目前正在学vue,写过响应、移动、pc端等页面。熟悉MVVM、MVC开发、并具有高效的自学能力,能独立分析解决问题。
+                                <p>你好,我叫陈伟灏,位于广东茂名,我是物联网应用技术专业,经常浏览网站对于网页制作更是产生了浓厚的兴趣,随即自学了前端开发,今后的职业规划向着全栈多方位发展,目前正在学vue,写过响应、移动、pc端等页面。熟悉MVVM、MVC开发、并具有高效的自学能力,能独立分析解决问题。
                                 </p>
                             </div>
                         </div>
@@ -101,81 +103,21 @@
                             <h1>专业技能</h1>
                         </div>
                         <div class="skills-content clearfix">
-                            <ul>
-                                <li>
-                                    <span>HTML</span>
-                                    <div>
-                                        <div class="skills-html"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span>CSS</span>
-                                    <div>
-                                        <div class="skills-css"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span>JavaScript</span>
-                                    <div>
-                                        <div class="skills-js"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span>JQuery</span>
-                                    <div>
-                                        <div class="skills-jq"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span>bootstrap</span>
-                                    <div>
-                                        <div class="skills-bs"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="600"
-                                style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-                                <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël</desc>
-                                <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
-                                <circle cx="300" cy="300" r="85" fill="#193340" stroke="none"
-                                    style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
-                                <text x="300" y="307" text-anchor="middle" font="20px Arial" stroke="none"
-                                    fill="#ffffff"
-                                    style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 20px Arial; opacity: 1;"
-                                    opacity="1">
-                                    <tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Skills</tspan>
-                                    <tspan dy="24" x="300" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-                                    </tspan>
 
-                                </text>
-                                <path fill="none" stroke="#97be0d"
-                                    d="M227.1680015377856,227.16800153778559A103,103,0,1,1,283.8872501008562,401.73189908129916"
-                                    stroke-width="26"
-                                    style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); stroke-width: 26;"
-                                    opacity="1">
-                                </path>
-                                <path fill="none" stroke="#bedbe9"
-                                    d="M116.44609235503538,240.35972008563513A193,193,0,0,1,413.4425536924473,143.85972008563513"
-                                    stroke-width="26"
-                                    style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); stroke-width: 26;"
-                                    opacity="1">
-                                </path>
-                                <path fill="none" stroke="#d3d671"
-                                    d="M137.09929519588738,294.31138203749236A163,163,0,1,1,294.31138203749236,462.9007048041126"
-                                    stroke-width="26"
-                                    style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); stroke-width: 26; opacity: 1;"
-                                    opacity="1"></path>
-                                <path fill="none" stroke="#d7d8d8"
-                                    d="M167.50610515379785,311.5917137854385A133,133,0,1,1,270.081509772266,429.5912186164363"
-                                    stroke-width="26"
-                                    style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); stroke-width: 26; opacity: 1;"
-                                    opacity="1"></path>
-                                <path fill="none" stroke="#e4a787"
-                                    d="M223.72950803837588,90.44854556474243A223,223,0,1,1,77.13584557474164,307.78258776465765"
-                                    stroke-width="26"
-                                    style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); stroke-width: 26; opacity: 1;"
-                                    opacity="1"></path>
-                            </svg>
+                            <div id="main" class="pic-skills" style="width: 600px;height:400px;"></div>
+                            <div class="context-box">
+                                <p>
+                                    1.熟练掌握HTML5技术开发，熟悉响应式布局和弹性盒布局，百分比自适应布局，熟练掌握CSS3动画技术，且能熟练应用Animate.css动画库。<br>
+                                    2.熟练使用HTML5新特性canvas，LocalStorage，Sessionstorage，vedio，audio等开发项目<br>
+                                    3.熟悉各种Web前端技术，包括HTML、DIV、CSS、Javascript、jQuery、AJAX、JSON、Cookie等。<br>
+                                    4.使用移动端的rem布局,响应式布局,flex弹性布局解决不同移动端设备的适配<br>
+                                    5.熟悉bootstrap,Jquery类库进行pc端项目快速开发, 熟练使用Swiper,sui等插件进行移动端项目的开发。<br>
+                                    6.熟练使用github进行代码管理，使用git版本管理工具。<br>
+                                    7.熟悉原生JS,熟悉JavaScript的面向对象编程，了解作用域以及闭包的原理。<br>
+                                    8.掌握Css类库Sass技术、Less技术，了解ECharts并使用进行数据可视化开发<br>
+                                    9.了解vue框架对模块化开发有着一定的理解，能使用vuecli、vueRouter进行项目开发。<br>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -197,7 +139,9 @@
                                     <div class="swiper-slide"><a href="./demo/meilishuo/index-meilishuo.html"
                                             target='_blank'><span>美丽说主页</span></a></div>
                                     <div class="swiper-slide"><a href="./demo/models-bootstrap/index-models.html"
-                                            target='_blank'><span>models模特网主页</span></a></div>
+                                            target='_blank'><span>bootstrap-models模特网主页</span></a></div>
+                                    <div class="swiper-slide"><a href="./demo/music163/index.html"
+                                            target='_blank'><span>vue-手机版网易云音乐</span></a></div>
                                 </div>
                                 <!-- Add Pagination -->
                                 <div class="swiper-pagination mypag2"></div>
