@@ -1,3 +1,32 @@
+// 防抖函数
+function debounce(func, wait, immediate) {
+    var timeout, result;
+    let debounced = function () {
+        var context = this;
+        var args = arguments;
+        // 清除定时器
+        if (timeout) clearTimeout(timeout);
+        if (immediate) { //immediate是true，func要立即执行
+            var callNow = !timeout;
+            timeout = setTimeout(function () {
+                timeout = null;
+            }, wait);
+            // 立即执行
+            if (callNow) func.apply(context, args);
+        } else {
+            // 不立即执行
+            timeout = setTimeout(function () {
+                func.apply(context, args);
+            }, wait);
+        }
+    }
+    //cancel方法 取消func函数的执行
+    debounced.cancel = function () {
+        clearTimeout(timeout);
+        timeout = null;
+    }
+    return debounced;
+}
 // echarts 表图 专业技能
 var myChart = echarts.init(document.getElementById('main'), 'westeros');
 
@@ -15,7 +44,7 @@ option = {
         top: 'bottom',
         data: ['HTML5', 'CSS3', 'JavaScript', 'JQuery', 'Bootstrap', 'Vue', 'git', 'other']
     },
-   
+
     series: [{
         type: 'pie',
         radius: [30, 110],
@@ -73,8 +102,8 @@ swiper1.mousewheel.disable();
 var mySwiper = document.querySelector('.swiper-container1').swiper
 // mySwiper.slideNext(); slidePrev
 // 滚动轮绑定事件
-document.onmousewheel = scrollFn;
-document.addEventListener('DOMMouseScroll', scrollFn)
+document.onmousewheel =debounce(scrollFn,300) ;
+document.addEventListener('DOMMouseScroll', debounce(scrollFn,300))
 // 自定义滚轮事件
 function scrollFn(event) {
     if (event.wheelDelta) {
